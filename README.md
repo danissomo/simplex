@@ -1,5 +1,5 @@
 # simplex
-#H1 Симплекс метод
+##Симплекс метод
 -
 ```console
 foo@bar:~$ git clone --recurse-submodules https://github.com/danissomo/simplex.git 
