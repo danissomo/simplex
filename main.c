@@ -11,7 +11,8 @@ int main(){
              * VecB_buf  = gsl_vector_alloc(VecB->size);
   
   gsl_vector_memcpy(VecB_buf, VecB);
-for(int i = 0; i < 10; i++){
+int end_simplex = 0;
+for(int i = 0; !end_simplex ; i++){
   gsl_matrix_get_row(last_row, Mat, 0);
   int mi_lr = gsl_vector_min_index(last_row);
   gsl_matrix_get_col(drive_col, Mat, mi_lr);
@@ -42,6 +43,15 @@ for(int i = 0; i < 10; i++){
     for (int j = 0; j < Mat->size2; j++)
       printf("%7.3g ", gsl_matrix_get(Mat, i, j));
   printf("\n");
+
+  gsl_matrix_get_row(buf_row, Mat, 0);
+  end_simplex = 1;
+  for(int  i = 1; i < buf_row->size-1; i++)
+    if(gsl_vector_get(buf_row, i) < 0){
+      end_simplex = 0;
+      break;
+    }
+  
 }
   
   return 0;
